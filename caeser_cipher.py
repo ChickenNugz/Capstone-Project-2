@@ -36,6 +36,9 @@ letters = 'abcdefghijklmnopqrstuvwxyz, .ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 num_letters = len(letters)
 
 def encrypt_decrypt(text, mode, key):
+
+    """Function to be used to decrypt or encrypt the message depending on user input. Uses the key"""
+
     result = ''
     if mode == 'd':
         key = -key
