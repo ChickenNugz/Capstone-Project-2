@@ -60,8 +60,22 @@ def encrypt_decrypt(text, mode, key):
 
 
 print('\n','***CAESAR CIPHER PROGRAM***', '\n')
-print('Do you want to encrypt or decrypt?')
-user_input = input('e/d: ').lower()
+def get_user_input():
+
+    """Asks the user if they want to encrypt or decrypt, and raises an error if they submit invalid input."""
+
+    try:
+        user_input = input('Do you want to encrypt or decrypt? Valid responses: "e" OR "d": ').lower()
+        if user_input != 'e' and user_input != 'd':
+            raise ValueError('Invalid response. Please type "e" or "d"')
+        return user_input
+    except ValueError as e:
+        print(e)
+        return get_user_input()
+
+
+user_input = get_user_input()
+
 
 if user_input == 'e':
     print('Encryption Mode Selected')
