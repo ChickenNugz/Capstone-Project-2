@@ -32,8 +32,22 @@ numbered_dict_of_letters = {
 #test comment for pushing to github
 
 
-letters = 'abcdefghijklmnopqrstuvwxyz, .ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+letters = 'abcdefghij klmnopqrstuvwxyz,!@#.ABCDEFGHIJKLMNOPQRSTUVWXYZ$%^&*()_+=-`~[]{};:|<>?'
 num_letters = len(letters)
+
+def get_key():
+
+    """Gets an appropriate key from user input"""
+
+    try:
+        key_input = int(input('Enter the key (1 through 90): '))
+        if key_input > 90 or key_input < 1:
+            raise ValueError('Invalid response. Please enter a number between 1 and 90')
+        return key_input
+    except ValueError as e:
+        print(e)
+        return get_key()
+
 
 def encrypt_decrypt(text, mode, key):
 
@@ -45,7 +59,7 @@ def encrypt_decrypt(text, mode, key):
 
     for letter in text:
         letter = letter.lower()
-        if not letter == ' ':
+        if not letter == '':
             index = letters.find(letter)
             if index == -1:
                 result += letter
@@ -74,25 +88,24 @@ def get_user_input():
         return get_user_input()
 
 
-user_input = get_user_input()
+def run_program():
+    user_input = get_user_input()
 
+    if user_input == 'e':
+        print('Encryption Mode Selected')
+        key = get_key()
+        text = input('Enter the text to encrypt: ')
+        ciphertext = encrypt_decrypt(text, user_input, key)
+        print (f'CIPHERTEXT: "{ciphertext}"')
 
-if user_input == 'e':
-    print('Encryption Mode Selected')
-    key = int(input('Enter the key (1 through 26): '))
-    text = input('Enter the text to encrypt: ')
-    ciphertext = encrypt_decrypt(text, user_input, key)
-    print (f'CIPHERTEXT: {ciphertext}')
+    elif user_input == 'd':
+        print('Decryption Mode Selected')
+        key = int(input('Enter the key (1 through 90): '))
+        text = input('Enter the text to decrypt: ')
+        plaintext = encrypt_decrypt(text, user_input, key)
+        print (f'PLAINTEXT: "{plaintext}"')
 
-elif user_input == 'd':
-    print('Decryption Mode Selected')
-    key = int(input('Enter the key (1 through 26): '))
-    text = input('Enter the text to decrypt: ')
-    plaintext = encrypt_decrypt(text, user_input, key)
-    print (f'PLAINTEXT: {plaintext}')
+    run_program()
 
-
-
-
-
+run_program()
 
